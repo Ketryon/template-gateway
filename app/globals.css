@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular,
+    monospace;
+
+  /* Sage palette — oklch perceptual color space */
+  --color-sage-50: oklch(98.2% 0.006 145);
+  --color-sage-100: oklch(95.8% 0.012 145);
+  --color-sage-200: oklch(91% 0.02 148);
+  --color-sage-300: oklch(84% 0.03 150);
+  --color-sage-400: oklch(70% 0.045 150);
+  --color-sage-500: oklch(55% 0.055 150);
+  --color-sage-600: oklch(45% 0.045 150);
+  --color-sage-700: oklch(37% 0.035 152);
+  --color-sage-800: oklch(27% 0.025 155);
+  --color-sage-900: oklch(21% 0.018 155);
+  --color-sage-950: oklch(14% 0.012 155);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    background-color: var(--color-sage-50);
+    --scroll-padding-top: 5.25rem;
+    scroll-padding-top: var(--scroll-padding-top);
+
+    @variant dark {
+      background-color: var(--color-sage-950);
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sage-500);
+    outline-offset: 2px;
+  }
+}
+
+body {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+}
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+:disabled {
+  cursor: default;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-1rem); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
